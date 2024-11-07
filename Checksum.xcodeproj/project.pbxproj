@@ -33,9 +33,9 @@
 		EC02B9BD2CDCA6DA00CD6FBB /* Exceptions for "Checksum" folder in "ChecksumUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				DropZoneView.swift,
-				HashProgressView.swift,
-				HashRow.swift,
+				View/DropZoneView.swift,
+				View/HashProgressView.swift,
+				View/HashRow.swift,
 			);
 			target = EC02B9A42CDCA66C00CD6FBB /* ChecksumUITests */;
 		};
