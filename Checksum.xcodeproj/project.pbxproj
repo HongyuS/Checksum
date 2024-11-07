@@ -29,9 +29,24 @@
 		EC02B9A52CDCA66C00CD6FBB /* ChecksumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChecksumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EC02B9BD2CDCA6DA00CD6FBB /* Exceptions for "Checksum" folder in "ChecksumUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				DropZoneView.swift,
+				HashProgressView.swift,
+				HashRow.swift,
+			);
+			target = EC02B9A42CDCA66C00CD6FBB /* ChecksumUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EC02B98C2CDCA66B00CD6FBB /* Checksum */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EC02B9BD2CDCA6DA00CD6FBB /* Exceptions for "Checksum" folder in "ChecksumUITests" target */,
+			);
 			path = Checksum;
 			sourceTree = "<group>";
 		};
