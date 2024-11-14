@@ -35,10 +35,13 @@ struct ContentView: View {
                     .padding()
                 
                 if let result = viewModel.hashResult {
-                    Group {
-                        HashRow(title: "MD5", hash: result.md5)
-                        HashRow(title: "SHA1", hash: result.sha1)
-                        HashRow(title: "SHA256", hash: result.sha256)
+                    ScrollView {
+                        LazyVStack(spacing: 12) {
+                            HashRow(title: "MD5", hash: result.md5)
+                            HashRow(title: "SHA1", hash: result.sha1)
+                            HashRow(title: "SHA256", hash: result.sha256)
+                        }
+                        .padding(.horizontal)
                     }
                 }
             }

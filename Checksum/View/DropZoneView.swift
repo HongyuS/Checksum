@@ -14,7 +14,7 @@ struct DropZoneView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [10]))
                 .foregroundColor(.blue)
                 .frame(height: 150)

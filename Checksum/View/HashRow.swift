@@ -20,6 +20,9 @@ struct HashRow: View {
                 Text(hash)
                     .font(.system(.body, design: .monospaced))
                     .textSelection(.enabled)
+                    .lineLimit(1)
+                
+                Spacer()
                 
                 Button(action: {
                     NSPasteboard.general.clearContents()
@@ -30,8 +33,9 @@ struct HashRow: View {
             }
         }
         .padding()
+        .frame(maxWidth: .infinity)
         .background(Color.gray.opacity(0.1))
-        .cornerRadius(8)
+        .clipShape(.rect(cornerRadius: 8, style: .continuous))
     }
 }
 
