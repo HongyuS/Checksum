@@ -35,6 +35,7 @@
 			membershipExceptions = (
 				View/DropZoneView.swift,
 				View/HashProgressView.swift,
+				View/HashResultView.swift,
 				View/HashRow.swift,
 			);
 			target = EC02B9A42CDCA66C00CD6FBB /* ChecksumUITests */;

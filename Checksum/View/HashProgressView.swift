@@ -19,7 +19,7 @@ struct HashProgressView: View {
             
             Text(message)
                 .font(.caption)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
             
             Text("\(Int(progress * 100))%")
                 .font(.headline)

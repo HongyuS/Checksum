@@ -11,44 +11,19 @@ struct ContentView: View {
     @StateObject private var viewModel = ChecksumViewModel()
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("文件校验和计算器")
-                .font(.title)
-                .padding()
-            
+        HStack(alignment: .top) {
             DropZoneView(selectedFile: $viewModel.selectedFile) {
                 viewModel.calculateHashes()
             }
+            .frame(maxWidth: viewModel.isCalculating || viewModel.isFileSelected ? 200 : .infinity)
             .onTapGesture {
                 selectFile()
             }
             
-            if viewModel.isCalculating {
-                HashProgressView(
-                    progress: viewModel.progress,
-                    message: "正在计算校验和..."
-                )
+            if viewModel.isCalculating || viewModel.isFileSelected {
+                HashResultView(viewModel: viewModel)
+                    .frame(maxWidth: .infinity)
             }
-            
-            if viewModel.isFileSelected && !viewModel.isCalculating {
-                Text("已选择文件: \(viewModel.selectedFile?.lastPathComponent ?? "")")
-                    .padding()
-                
-                if let result = viewModel.hashResult {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVStack(spacing: 10) {
-                            HashRow(title: "MD5", hash: result.md5)
-                            HashRow(title: "SHA1", hash: result.sha1)
-                            HashRow(title: "SHA256", hash: result.sha256)
-                            HashRow(title: "SHA384", hash: result.sha384)
-                            HashRow(title: "SHA512", hash: result.sha512)
-                        }
-                        .padding(.horizontal)
-                    }
-                }
-            }
-            
-            Spacer()
         }
         .padding()
         .onDisappear {

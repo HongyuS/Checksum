@@ -15,9 +15,9 @@ struct DropZoneView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [10]))
-                .foregroundStyle(.blue)
-                .frame(height: 150)
+                .strokeBorder(style: StrokeStyle(lineWidth: 1))
+                .foregroundStyle(.gray)
+                .frame(minWidth: 150, minHeight: 150)
             
             VStack(spacing: 12) {
                 Image(systemName: "arrow.down.doc")
@@ -26,7 +26,7 @@ struct DropZoneView: View {
                     .font(.headline)
                 Text("或点击选择文件")
                     .font(.subheadline)
-                    .foregroundColor(.gray)
+                    .foregroundStyle(.gray)
             }
         }
         .padding()
