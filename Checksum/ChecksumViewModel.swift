@@ -41,6 +41,8 @@ class ChecksumViewModel: ObservableObject {
                 var md5Context = Insecure.MD5()
                 var sha1Context = Insecure.SHA1()
                 var sha256Context = SHA256()
+                var sha384Context = SHA384()
+                var sha512Context = SHA512()
                 
                 let fileHandle = try FileHandle(forReadingFrom: fileURL)
                 var readSize: UInt64 = 0
@@ -51,6 +53,8 @@ class ChecksumViewModel: ObservableObject {
                     md5Context.update(data: data)
                     sha1Context.update(data: data)
                     sha256Context.update(data: data)
+                    sha384Context.update(data: data)
+                    sha512Context.update(data: data)
                     
                     readSize += UInt64(data.count)
                     await MainActor.run {
@@ -62,7 +66,9 @@ class ChecksumViewModel: ObservableObject {
                     let result = HashResult(
                         md5: md5Context.finalize().map { String(format: "%02hhx", $0) }.joined(),
                         sha1: sha1Context.finalize().map { String(format: "%02hhx", $0) }.joined(),
-                        sha256: sha256Context.finalize().map { String(format: "%02hhx", $0) }.joined()
+                        sha256: sha256Context.finalize().map { String(format: "%02hhx", $0) }.joined(),
+                        sha384: sha384Context.finalize().map { String(format: "%02hhx", $0) }.joined(),
+                        sha512: sha512Context.finalize().map { String(format: "%02hhx", $0) }.joined()
                     )
                     
                     await MainActor.run {

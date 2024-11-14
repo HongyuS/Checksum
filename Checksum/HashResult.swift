@@ -11,4 +11,6 @@ struct HashResult {
     let md5: String
     let sha1: String
     let sha256: String
+    let sha384: String
+    let sha512: String
 }
