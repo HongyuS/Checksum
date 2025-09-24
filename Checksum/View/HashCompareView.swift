@@ -15,7 +15,7 @@ struct HashCompareView: View {
         VStack(spacing: 16) {
             // 分隔线
             Divider()
-                .padding(.top)
+                .padding(.trailing)
             
             // 比较功能标题
             HStack {
@@ -42,21 +42,16 @@ struct HashCompareView: View {
             .padding(.trailing)
             
             // 输入框
-            VStack(alignment: .leading, spacing: 8) {
-                Text("粘贴要比较的哈希值:")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
                 
-                TextField("输入或粘贴哈希值...", text: $viewModel.compareText, axis: .vertical)
-                    .textFieldStyle(.roundedBorder)
-                    .focused($isTextFieldFocused)
-                    .lineLimit(2...4)
-                    .font(.system(.body, design: .monospaced))
-                    .onChange(of: viewModel.compareText) { oldValue, newValue in
-                        viewModel.compareHash(newValue)
-                    }
-            }
-            .padding(.trailing)
+            TextField("输入或粘贴哈希值...", text: $viewModel.compareText, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .focused($isTextFieldFocused)
+                .lineLimit(2...4)
+                .padding(.trailing)
+                .font(.system(.body, design: .monospaced))
+                .onChange(of: viewModel.compareText) { oldValue, newValue in
+                    viewModel.compareHash(newValue)
+                }
         }
         .padding(.vertical)
     }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CryptoKit
+import AppKit
 
 @MainActor
 class ChecksumViewModel: ObservableObject {
@@ -21,6 +22,32 @@ class ChecksumViewModel: ObservableObject {
     
     var isFileSelected: Bool {
         selectedFile != nil
+    }
+    
+    // 获取文件大小
+    var fileSize: Int64 {
+        guard let fileURL = selectedFile else { return 0 }
+        do {
+            let attributes = try FileManager.default.attributesOfItem(atPath: fileURL.path)
+            return attributes[.size] as? Int64 ?? 0
+        } catch {
+            return 0
+        }
+    }
+    
+    // 格式化文件大小
+    var formattedFileSize: String {
+        let size = fileSize
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useKB, .useMB, .useGB, .useTB]
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: size)
+    }
+    
+    // 获取文件图标
+    var fileIcon: NSImage? {
+        guard let fileURL = selectedFile else { return nil }
+        return NSWorkspace.shared.icon(forFile: fileURL.path)
     }
     
     func selectFile(_ url: URL) {

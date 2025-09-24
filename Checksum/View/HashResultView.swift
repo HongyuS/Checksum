@@ -30,14 +30,42 @@ struct HashResultView: View {
                     progress: viewModel.progress,
                     message: "正在计算校验和..."
                 )
+                .padding(.trailing)
                 
                 Spacer()
             }
             
             if viewModel.isFileSelected && !viewModel.isCalculating {
-                Text("\(viewModel.selectedFile?.lastPathComponent ?? "")")
-                    .font(.headline)
-                    .padding()
+                // 文件信息显示
+                HStack(spacing: 12) {
+                    // 文件图标 - 使用真实的文件图标
+                    Group {
+                        if let nsImage = viewModel.fileIcon {
+                            Image(nsImage: nsImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 32, height: 32)
+                        } else {
+                            Image(systemName: "doc.fill")
+                                .font(.system(size: 32))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    // 文件名和大小
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(viewModel.selectedFile?.lastPathComponent ?? "")
+                            .font(.headline)
+                        
+                        Text(viewModel.formattedFileSize)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.vertical)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
                 if let result = viewModel.hashResult {
                     VStack(spacing: 16) {
