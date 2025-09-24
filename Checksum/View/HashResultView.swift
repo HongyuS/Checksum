@@ -7,8 +7,19 @@
 
 import SwiftUI
 
+enum HashType: String, CaseIterable, Identifiable {
+    case md5 = "MD5"
+    case sha1 = "SHA1"
+    case sha256 = "SHA256"
+    case sha384 = "SHA384"
+    case sha512 = "SHA512"
+    
+    var id: String { rawValue }
+}
+
 struct HashResultView: View {
     @ObservedObject var viewModel: ChecksumViewModel
+    @State private var selectedHashType: HashType = .md5
     
     var body: some View {
         VStack {
@@ -24,23 +35,47 @@ struct HashResultView: View {
             }
             
             if viewModel.isFileSelected && !viewModel.isCalculating {
-                Text("已选择文件: \(viewModel.selectedFile?.lastPathComponent ?? "")")
+                Text("\(viewModel.selectedFile?.lastPathComponent ?? "")")
+                    .font(.headline)
                     .padding()
                 
                 if let result = viewModel.hashResult {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVStack(spacing: 10) {
-                            HashRow(title: "MD5", hash: result.md5)
-                            HashRow(title: "SHA1", hash: result.sha1)
-                            HashRow(title: "SHA256", hash: result.sha256)
-                            HashRow(title: "SHA384", hash: result.sha384)
-                            HashRow(title: "SHA512", hash: result.sha512)
+                    VStack(spacing: 16) {
+                        // Hash 类型选择器
+                        Picker("Hash Type", selection: $selectedHashType) {
+                            ForEach(HashType.allCases) { hashType in
+                                Text(hashType.rawValue).tag(hashType)
+                            }
                         }
-                        .padding(.horizontal)
+                        .pickerStyle(.segmented)
+                        .labelsHidden()
+                        .padding(.trailing)
+                        
+                        // 选中的 hash 结果
+                        HashRow(title: selectedHashType.rawValue, hash: getHashValue(for: selectedHashType, from: result))
+                            .padding(.trailing)
+                        
+                        // 添加比较功能
+                        HashCompareView(viewModel: viewModel)
                     }
                 }
             }
         }
         .frame(minWidth: 512)
+    }
+    
+    private func getHashValue(for type: HashType, from result: HashResult) -> String {
+        switch type {
+        case .md5:
+            return result.md5
+        case .sha1:
+            return result.sha1
+        case .sha256:
+            return result.sha256
+        case .sha384:
+            return result.sha384
+        case .sha512:
+            return result.sha512
+        }
     }
 }

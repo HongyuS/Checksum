@@ -14,6 +14,8 @@ class ChecksumViewModel: ObservableObject {
     @Published var hashResult: HashResult?
     @Published var isCalculating = false
     @Published var progress: Double = 0
+    @Published var compareText = ""
+    @Published var comparisonResult: HashComparisonResult?
     
     private var calculationTask: Task<Void, Never>?
     
@@ -23,6 +25,8 @@ class ChecksumViewModel: ObservableObject {
     
     func selectFile(_ url: URL) {
         selectedFile = url
+        // 清空之前的比较状态
+        clearComparison()
         calculateHashes()
     }
     
@@ -90,6 +94,54 @@ class ChecksumViewModel: ObservableObject {
         calculationTask?.cancel()
         calculationTask = nil
         isCalculating = false
+    }
+    
+    func compareHash(_ inputText: String) {
+        guard let result = hashResult else {
+            comparisonResult = nil
+            return
+        }
+        
+        let cleanedInput = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: " ", with: "")
+            .lowercased()
+        
+        if cleanedInput.isEmpty {
+            comparisonResult = nil
+            return
+        }
+        
+        var matchedHash: String?
+        var hashType: String?
+        
+        if cleanedInput == result.md5.lowercased() {
+            matchedHash = result.md5
+            hashType = "MD5"
+        } else if cleanedInput == result.sha1.lowercased() {
+            matchedHash = result.sha1
+            hashType = "SHA1"
+        } else if cleanedInput == result.sha256.lowercased() {
+            matchedHash = result.sha256
+            hashType = "SHA256"
+        } else if cleanedInput == result.sha384.lowercased() {
+            matchedHash = result.sha384
+            hashType = "SHA384"
+        } else if cleanedInput == result.sha512.lowercased() {
+            matchedHash = result.sha512
+            hashType = "SHA512"
+        }
+        
+        comparisonResult = HashComparisonResult(
+            inputHash: cleanedInput,
+            matchedHash: matchedHash,
+            hashType: hashType,
+            isMatch: matchedHash != nil
+        )
+    }
+    
+    func clearComparison() {
+        compareText = ""
+        comparisonResult = nil
     }
     
     deinit {
