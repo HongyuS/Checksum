@@ -22,7 +22,7 @@ struct HashProgressView: View {
                 .foregroundStyle(.secondary)
             
             Text("\(Int(progress * 100))%")
-                .font(.headline)
+                .font(.largeTitle)
         }
         .padding()
         .frame(maxWidth: .infinity)

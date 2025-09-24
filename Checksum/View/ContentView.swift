@@ -25,7 +25,8 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity)
             }
         }
-        .padding()
+        .frame(minWidth: 744, minHeight: 292)
+        .padding(8)
         .onDisappear {
             viewModel.cancelCalculation()
         }

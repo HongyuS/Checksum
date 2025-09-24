@@ -18,6 +18,7 @@ struct DropZoneView: View {
                 .strokeBorder(style: StrokeStyle(lineWidth: 1))
                 .foregroundStyle(.gray)
                 .frame(minWidth: 150, minHeight: 150)
+                .contentShape(.rect(cornerRadius: 12, style: .continuous))
             
             VStack(spacing: 12) {
                 Image(systemName: "arrow.down.doc")

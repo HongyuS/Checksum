@@ -54,6 +54,10 @@ struct HashCompareView: View {
                 }
         }
         .padding(.vertical)
+        .contentShape(.containerRelative)
+        .onTapGesture {
+            isTextFieldFocused = false
+        }
     }
 }
 
