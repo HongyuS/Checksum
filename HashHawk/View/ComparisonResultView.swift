@@ -40,10 +40,9 @@ struct ComparisonResultView: View {
     }
     
     private var accessibilityLabel: String {
-        if let hashType = comparison.hashType {
-            "哈希比对\(comparison.isMatch ? "匹配" : "不匹配")，算法类型为\(hashType)"
-        } else {
-            "哈希比对\(comparison.isMatch ? "匹配" : "不匹配")"
-        }
+        AppLocalization.comparisonAccessibilityLabel(
+            isMatch: comparison.isMatch,
+            hashType: comparison.hashType
+        )
     }
 }

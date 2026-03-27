@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HashProgressView: View {
     let progress: Double
-    let message: String
+    let message: LocalizedStringKey
     
     var body: some View {
         ChecksumCard {
@@ -21,7 +21,7 @@ struct HashProgressView: View {
 
                     Spacer()
 
-                    Label("计算中", systemImage: "cpu")
+                    Label("hash.progress.calculating", systemImage: "cpu")
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
                         .glassEffect(.regular.tint(Color.orange.opacity(0.22)).interactive(), in: .capsule)
@@ -39,5 +39,5 @@ struct HashProgressView: View {
 }
 
 #Preview {
-    HashProgressView(progress: 0.4, message: "正在生成 MD5、SHA1、SHA256、SHA384 和 SHA512…")
+    HashProgressView(progress: 0.4, message: "mainContent.calculating.message")
 }

@@ -51,7 +51,7 @@ struct HashTypeSelectorView: View {
                         }
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("选择\(hashType.rawValue)")
+                .accessibilityLabel(AppLocalization.hashTypeSelectionAccessibilityLabel(hashType.rawValue))
             }
         }
         .padding(6)

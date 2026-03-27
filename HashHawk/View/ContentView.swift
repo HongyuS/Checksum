@@ -53,7 +53,7 @@ struct ContentView: View {
         case .failure(let error):
             let nsError = error as NSError
             guard nsError.code != NSUserCancelledError else { return }
-            viewModel.errorMessage = "文件选择失败：\(error.localizedDescription)"
+            viewModel.errorMessage = AppLocalization.fileSelectionFailed(error.localizedDescription)
         }
     }
 }

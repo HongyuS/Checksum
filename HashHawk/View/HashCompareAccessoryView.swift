@@ -39,7 +39,7 @@ struct HashCompareAccessoryView: View {
                 )
                 .buttonStyle(.plain)
                 .glassEffect(.regular.interactive(), in: .circle)
-                .accessibilityLabel("清除比对输入")
+                .accessibilityLabel(Text("hash.compare.clear"))
             }
         }
         .frame(height: HashHawkLayout.compareControlHeight)

@@ -101,7 +101,10 @@ final class HashHawkViewModel {
             } catch {
                 self.hashResult = nil
                 self.isCalculating = false
-                self.errorMessage = "无法读取“\(selectedFile.lastPathComponent)”。\(error.localizedDescription)"
+                self.errorMessage = AppLocalization.unableToReadFile(
+                    selectedFile.lastPathComponent,
+                    description: error.localizedDescription
+                )
             }
             
             self.calculationTask = nil

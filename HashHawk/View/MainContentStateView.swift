@@ -14,16 +14,16 @@ struct MainContentStateView: View {
         switch viewModel.mainContentState {
         case .idle:
             ContentUnavailableView(
-                "等待文件",
+                "mainContent.idle.title",
                 systemImage: "doc.badge.plus",
-                description: Text("从左侧边栏拖放文件，或使用右上角打开文件。")
+                description: Text("mainContent.idle.description")
             )
             .frame(maxWidth: .infinity, minHeight: 320)
 
         case .calculating:
             HashProgressView(
                 progress: viewModel.progress,
-                message: "正在生成 MD5、SHA1、SHA256、SHA384 和 SHA512…"
+                message: "mainContent.calculating.message"
             )
 
         case .result(let result):
@@ -35,7 +35,7 @@ struct MainContentStateView: View {
         case .error(let errorMessage):
             ChecksumCard {
                 VStack(alignment: .leading, spacing: HashHawkLayout.contentSpacing) {
-                    Label("无法读取文件", systemImage: "exclamationmark.triangle.fill")
+                    Label("mainContent.error.unableToRead", systemImage: "exclamationmark.triangle.fill")
                         .foregroundStyle(.red)
 
                     Text(errorMessage)

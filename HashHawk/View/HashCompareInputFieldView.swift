@@ -14,7 +14,7 @@ struct HashCompareInputFieldView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             if compareText.isEmpty {
-                Text("输入或粘贴哈希值…")
+                Text("hash.compare.placeholder")
                     .font(.body.monospaced())
                     .foregroundStyle(.tertiary)
                     .padding(.horizontal, 14)
@@ -26,6 +26,7 @@ struct HashCompareInputFieldView: View {
                 .lineLimit(1)
                 .font(.body.monospaced())
                 .focused(isFocused)
+                .accessibilityLabel(Text("hash.compare.placeholder"))
                 .padding(.horizontal, 14)
                 .padding(.vertical, 11)
         }

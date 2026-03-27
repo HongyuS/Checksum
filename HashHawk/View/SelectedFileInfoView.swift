@@ -39,7 +39,7 @@ struct SelectedFileInfoView: View {
                         .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("显示文件路径")
+                    .accessibilityLabel(Text("selectedFile.showPath"))
                     .accessibilityValue(displayPath)
                     .popover(isPresented: $isPathPopoverPresented, arrowEdge: .top) {
                         pathPopover
@@ -59,7 +59,7 @@ struct SelectedFileInfoView: View {
 
     private var pathPopover: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("文件路径", systemImage: "folder")
+            Label("selectedFile.path", systemImage: "folder")
                 .font(.headline)
 
             Text(displayPath)

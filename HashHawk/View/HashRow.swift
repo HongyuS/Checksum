@@ -25,7 +25,7 @@ struct HashRow: View {
             HStack {
                 Spacer()
 
-                Button("复制", systemImage: "doc.on.doc", action: copyHash)
+                Button("hash.action.copy", systemImage: "doc.on.doc", action: copyHash)
                     .buttonStyle(.glass)
             }
         }

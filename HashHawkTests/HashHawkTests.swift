@@ -82,4 +82,17 @@ struct HashHawkTests {
 
         viewModel.cancelCalculation()
     }
+
+    @Test func localizedResourcesProvideEnglishAndSimplifiedChineseStrings() throws {
+        #expect(try localizedString(forKey: "dropZone.button.open", localization: "en") == "Open File")
+        #expect(try localizedString(forKey: "dropZone.button.open", localization: "zh-Hans") == "打开文件")
+        #expect(try localizedString(forKey: "hash.compare.clear", localization: "en") == "Clear comparison input")
+        #expect(try localizedString(forKey: "hash.compare.clear", localization: "zh-Hans") == "清除比对输入")
+    }
+
+    private func localizedString(forKey key: String, localization: String) throws -> String {
+        let lprojPath = try #require(Bundle.main.path(forResource: localization, ofType: "lproj"))
+        let bundle = try #require(Bundle(path: lprojPath))
+        return bundle.localizedString(forKey: key, value: nil, table: nil)
+    }
 }

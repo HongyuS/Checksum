@@ -65,23 +65,27 @@ struct DropZoneView: View {
 
     private var openFileButton: some View {
         Button(
-            hasSelectedFile ? "更换文件" : "打开文件",
+            openFileButtonTitle,
             systemImage: "folder",
             action: openFilePicker
         )
     }
 
-    private var promptTitle: String {
-        isTargeted ? "松开即可开始计算" : "拖放文件到这里"
+    private var openFileButtonTitle: LocalizedStringKey {
+        hasSelectedFile ? "dropZone.button.replace" : "dropZone.button.open"
     }
 
-    private var promptSubtitle: String {
+    private var promptTitle: LocalizedStringKey {
+        isTargeted ? "dropZone.prompt.title.release" : "dropZone.prompt.title.drop"
+    }
+
+    private var promptSubtitle: LocalizedStringKey {
         if isTargeted {
-            "释放鼠标后会立即读取并计算哈希值"
+            "dropZone.prompt.subtitle.release"
         } else if hasSelectedFile {
-            "拖入新文件即可替换，或使用右上角重新选择"
+            "dropZone.prompt.subtitle.replace"
         } else {
-            "也可以使用右上角打开文件"
+            "dropZone.prompt.subtitle.open"
         }
     }
 

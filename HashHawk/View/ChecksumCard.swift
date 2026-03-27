@@ -25,7 +25,7 @@ struct ChecksumCard<Content: View>: View {
 
 #Preview {
     ChecksumCard {
-        Text("Preview")
+        Text(verbatim: "Preview")
             .font(.headline)
     }
     .padding()
