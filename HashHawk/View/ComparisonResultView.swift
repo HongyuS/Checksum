@@ -46,3 +46,21 @@ struct ComparisonResultView: View {
         )
     }
 }
+
+#Preview("Comparison • Match") {
+    ComparisonResultView(comparison: PreviewFixtures.matchedComparison)
+        .padding()
+        .preferredColorScheme(.light)
+}
+
+#Preview("Comparison • Mismatch") {
+    ComparisonResultView(comparison: PreviewFixtures.mismatchedComparison)
+        .padding()
+        .preferredColorScheme(.light)
+}
+
+#Preview("Comparison • Match • Dark") {
+    ComparisonResultView(comparison: PreviewFixtures.matchedComparison)
+        .padding()
+        .preferredColorScheme(.dark)
+}

@@ -46,16 +46,32 @@ struct HashCompareAccessoryView: View {
     }
 }
 
-#Preview {
+#Preview("Accessory • Match") {
     HashCompareAccessoryView(
-        comparisonResult: HashComparisonResult(
-            inputHash: "abc",
-            matchedHash: "abc",
-            hashType: "SHA256",
-            isMatch: true
-        ),
+        comparisonResult: PreviewFixtures.matchedComparison,
         showsClearButton: true,
         clearAction: {}
     )
     .padding()
+    .preferredColorScheme(.light)
+}
+
+#Preview("Accessory • Mismatch") {
+    HashCompareAccessoryView(
+        comparisonResult: PreviewFixtures.mismatchedComparison,
+        showsClearButton: true,
+        clearAction: {}
+    )
+    .padding()
+    .preferredColorScheme(.light)
+}
+
+#Preview("Accessory • Clear Only • Dark") {
+    HashCompareAccessoryView(
+        comparisonResult: nil,
+        showsClearButton: true,
+        clearAction: {}
+    )
+    .padding()
+    .preferredColorScheme(.dark)
 }

@@ -67,9 +67,18 @@ struct HashTypeSelectorView: View {
     }
 }
 
-#Preview {
+#Preview("Selector • Standard") {
     @Previewable @State var selection: HashType = .sha256
 
     HashTypeSelectorView(selection: $selection)
         .padding()
+        .frame(width: 520)
+}
+
+#Preview("Selector • Compact") {
+    @Previewable @State var selection: HashType = .sha512
+
+    HashTypeSelectorView(selection: $selection)
+        .padding()
+        .frame(width: 260)
 }

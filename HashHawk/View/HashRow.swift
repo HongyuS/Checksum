@@ -21,10 +21,10 @@ struct HashRow: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .scrollIndicators(.hidden)
-
+            
             HStack {
                 Spacer()
-
+                
                 Button("hash.action.copy", systemImage: "doc.on.doc", action: copyHash)
                     .buttonStyle(.glass)
             }
@@ -52,6 +52,16 @@ struct HashRow: View {
     }
 }
 
-#Preview {
-    HashRow(hash: "abcdef1234567890")
+#Preview("Hash Row • Short") {
+    HashRow(hash: PreviewFixtures.partialHashInput)
+        .padding()
+        .frame(width: 420)
+        .preferredColorScheme(.light)
+}
+
+#Preview("Hash Row • Long • Dark") {
+    HashRow(hash: PreviewFixtures.sampleHashResult.sha512)
+        .padding()
+        .frame(width: 520)
+        .preferredColorScheme(.dark)
 }

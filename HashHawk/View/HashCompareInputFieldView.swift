@@ -36,10 +36,22 @@ struct HashCompareInputFieldView: View {
     }
 }
 
-#Preview {
-    @Previewable @State var compareText = "abcdef123456"
+#Preview("Compare Field • Placeholder") {
+    @Previewable @State var compareText = ""
     @FocusState var isFocused: Bool
 
     HashCompareInputFieldView(compareText: $compareText, isFocused: $isFocused)
         .padding()
+        .frame(width: 460)
+        .preferredColorScheme(.light)
+}
+
+#Preview("Compare Field • Filled • Dark") {
+    @Previewable @State var compareText = PreviewFixtures.partialHashInput
+    @FocusState var isFocused: Bool
+
+    HashCompareInputFieldView(compareText: $compareText, isFocused: $isFocused)
+        .padding()
+        .frame(width: 460)
+        .preferredColorScheme(.dark)
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum HashHawkLayout {
-    static let windowMinWidth: Double = 820
+    static let windowMinWidth: Double = 960
     static let windowMinHeight: Double = 480
     static let contentWidth: Double = 920
     static let sidebarMinWidth: Double = 260

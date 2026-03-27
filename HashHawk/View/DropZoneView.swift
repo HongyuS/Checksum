@@ -93,3 +93,39 @@ struct DropZoneView: View {
         isTargeted ? "square.and.arrow.down.on.square.fill" : "square.and.arrow.down.on.square"
     }
 }
+
+#Preview("Drop Zone • Empty") {
+    NavigationStack {
+        DropZoneView(
+            hasSelectedFile: false,
+            openFilePicker: {},
+            handleDroppedFile: { _ in }
+        )
+    }
+    .frame(width: 340, height: 420)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Drop Zone • Replace") {
+    NavigationStack {
+        DropZoneView(
+            hasSelectedFile: true,
+            openFilePicker: {},
+            handleDroppedFile: { _ in }
+        )
+    }
+    .frame(width: 340, height: 420)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Drop Zone • Empty • Dark") {
+    NavigationStack {
+        DropZoneView(
+            hasSelectedFile: false,
+            openFilePicker: {},
+            handleDroppedFile: { _ in }
+        )
+    }
+    .frame(width: 340, height: 420)
+    .preferredColorScheme(.dark)
+}

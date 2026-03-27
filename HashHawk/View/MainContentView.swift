@@ -16,7 +16,7 @@ struct MainContentView: View {
                 0,
                 proxy.size.height - HashHawkLayout.detailTopInset - HashHawkLayout.outerPadding
             )
-
+            
             VStack(spacing: HashHawkLayout.sectionSpacing) {
                 if let selectedFile = viewModel.selectedFile {
                     SelectedFileInfoView(
@@ -27,9 +27,9 @@ struct MainContentView: View {
                         isCalculating: viewModel.isCalculating
                     )
                 }
-
+                
                 MainContentStateView(viewModel: viewModel)
-
+                
                 Spacer(minLength: 0)
             }
             .frame(maxWidth: HashHawkLayout.contentWidth, maxHeight: .infinity, alignment: .top)
@@ -42,6 +42,19 @@ struct MainContentView: View {
     }
 }
 
-#Preview {
-    MainContentView(viewModel: HashHawkViewModel())
+#Preview("Main Content • Result") {
+    MainContentView(
+        viewModel: PreviewFixtures.makeResultViewModel(
+            compareText: PreviewFixtures.sampleHashResult.sha256,
+            comparisonResult: PreviewFixtures.matchedComparison
+        )
+    )
+    .frame(width: 720, height: 480)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Main Content • Error • Dark") {
+    MainContentView(viewModel: PreviewFixtures.makeErrorViewModel())
+        .frame(width: 720, height: 480)
+        .preferredColorScheme(.dark)
 }

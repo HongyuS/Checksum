@@ -22,10 +22,24 @@ struct HashCompareFieldSectionView: View {
     }
 }
 
-#Preview {
-    @Previewable @State var viewModel = HashHawkViewModel()
+#Preview("Compare Section • Empty") {
+    @Previewable @State var viewModel = PreviewFixtures.makeResultViewModel()
     @FocusState var isFocused: Bool
 
     HashCompareFieldSectionView(viewModel: viewModel, isFocused: $isFocused)
         .padding()
+        .frame(width: 480)
+        .preferredColorScheme(.light)
+}
+
+#Preview("Compare Section • Typing • Dark") {
+    @Previewable @State var viewModel = PreviewFixtures.makeResultViewModel(
+        compareText: PreviewFixtures.partialHashInput
+    )
+    @FocusState var isFocused: Bool
+
+    HashCompareFieldSectionView(viewModel: viewModel, isFocused: $isFocused)
+        .padding()
+        .frame(width: 480)
+        .preferredColorScheme(.dark)
 }

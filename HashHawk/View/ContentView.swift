@@ -58,6 +58,14 @@ struct ContentView: View {
     }
 }
 
-#Preview {
+#Preview("Window • Light") {
     ContentView()
+        .frame(width: HashHawkLayout.windowMinWidth, height: HashHawkLayout.windowMinHeight)
+        .preferredColorScheme(.light)
+}
+
+#Preview("Window • Dark") {
+    ContentView()
+        .frame(width: HashHawkLayout.windowMinWidth, height: HashHawkLayout.windowMinHeight)
+        .preferredColorScheme(.dark)
 }

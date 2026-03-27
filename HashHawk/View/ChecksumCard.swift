@@ -23,10 +23,31 @@ struct ChecksumCard<Content: View>: View {
     }
 }
 
-#Preview {
+#Preview("Card • Light") {
     ChecksumCard {
-        Text(verbatim: "Preview")
-            .font(.headline)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Preview")
+                .font(.headline)
+
+            Text("Use this card to group hash results and actions.")
+                .foregroundStyle(.secondary)
+        }
     }
     .padding()
+    .frame(width: 360)
+}
+
+#Preview("Card • Dark") {
+    ChecksumCard {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Preview")
+                .font(.headline)
+
+            Text("Use this card to group hash results and actions.")
+                .foregroundStyle(.secondary)
+        }
+    }
+    .padding()
+    .frame(width: 360)
+    .preferredColorScheme(.dark)
 }

@@ -16,9 +16,23 @@ struct HashResultView: View {
         ChecksumCard {
             VStack(alignment: .leading, spacing: HashHawkLayout.contentSpacing) {
                 HashTypeSelectorView(selection: $selectedHashType)
-
+                
                 HashRow(hash: selectedHashType.value(from: result))
             }
         }
     }
+}
+
+#Preview("Hash Result • Default") {
+    HashResultView(result: PreviewFixtures.sampleHashResult)
+        .padding()
+        .frame(width: 620)
+        .preferredColorScheme(.light)
+}
+
+#Preview("Hash Result • Compact • Dark") {
+    HashResultView(result: PreviewFixtures.sampleHashResult)
+        .padding()
+        .frame(width: 360)
+        .preferredColorScheme(.dark)
 }

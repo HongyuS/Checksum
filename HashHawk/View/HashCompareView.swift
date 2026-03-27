@@ -18,7 +18,7 @@ struct HashCompareView: View {
                     viewModel: viewModel,
                     isFocused: $isCompareFieldFocused
                 )
-
+                
                 if showsAccessoryContent {
                     HashCompareAccessoryView(
                         comparisonResult: viewModel.comparisonResult,
@@ -29,13 +29,48 @@ struct HashCompareView: View {
             }
         }
     }
-
+    
     private var showsAccessoryContent: Bool {
         viewModel.comparisonResult != nil || !viewModel.compareText.isEmpty
     }
-
+    
     private func clearCompareField() {
         viewModel.clearComparison()
         isCompareFieldFocused = false
     }
+}
+
+#Preview("Compare • Match") {
+    HashCompareView(
+        viewModel: PreviewFixtures.makeResultViewModel(
+            compareText: PreviewFixtures.sampleHashResult.sha256,
+            comparisonResult: PreviewFixtures.matchedComparison
+        )
+    )
+    .padding()
+    .frame(width: 620)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Compare • Mismatch") {
+    HashCompareView(
+        viewModel: PreviewFixtures.makeResultViewModel(
+            compareText: PreviewFixtures.mismatchedComparison.inputHash,
+            comparisonResult: PreviewFixtures.mismatchedComparison
+        )
+    )
+    .padding()
+    .frame(width: 620)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Compare • Typing • Dark") {
+    HashCompareView(
+        viewModel: PreviewFixtures.makeResultViewModel(
+            compareText: PreviewFixtures.partialHashInput
+        )
+    )
+    .padding()
+    .frame(width: 620)
+    .preferredColorScheme(.dark)
 }
