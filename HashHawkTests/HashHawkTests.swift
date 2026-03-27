@@ -83,16 +83,38 @@ struct HashHawkTests {
         viewModel.cancelCalculation()
     }
 
-    @Test func localizedResourcesProvideEnglishAndSimplifiedChineseStrings() throws {
-        #expect(try localizedString(forKey: "dropZone.button.open", localization: "en") == "Open File")
-        #expect(try localizedString(forKey: "dropZone.button.open", localization: "zh-Hans") == "打开文件")
-        #expect(try localizedString(forKey: "hash.compare.clear", localization: "en") == "Clear comparison input")
-        #expect(try localizedString(forKey: "hash.compare.clear", localization: "zh-Hans") == "清除比对输入")
+    @Test func stringCatalogProvidesEnglishAndSimplifiedChineseStrings() throws {
+        let catalog = try loadStringCatalog()
+
+        #expect(try #require(catalog["sourceLanguage"] as? String) == "en")
+        #expect(try #require(catalog["version"] as? String) == "1.0")
+        #expect(try localizedCatalogValue(forKey: "dropZone.button.open", locale: "en", in: catalog) == "Open File")
+        #expect(try localizedCatalogValue(forKey: "dropZone.button.open", locale: "zh-Hans", in: catalog) == "打开文件")
+        #expect(try localizedCatalogValue(forKey: "hash.compare.clear", locale: "en", in: catalog) == "Clear comparison input")
+        #expect(try localizedCatalogValue(forKey: "hash.compare.clear", locale: "zh-Hans", in: catalog) == "清除比对输入")
     }
 
-    private func localizedString(forKey key: String, localization: String) throws -> String {
-        let lprojPath = try #require(Bundle.main.path(forResource: localization, ofType: "lproj"))
-        let bundle = try #require(Bundle(path: lprojPath))
-        return bundle.localizedString(forKey: key, value: nil, table: nil)
+    private func loadStringCatalog() throws -> [String: Any] {
+        let catalogURL = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("HashHawk/Localizable.xcstrings")
+
+        let data = try Data(contentsOf: catalogURL)
+        let object = try JSONSerialization.jsonObject(with: data)
+        return try #require(object as? [String: Any])
+    }
+
+    private func localizedCatalogValue(
+        forKey key: String,
+        locale: String,
+        in catalog: [String: Any]
+    ) throws -> String {
+        let strings = try #require(catalog["strings"] as? [String: Any])
+        let entry = try #require(strings[key] as? [String: Any])
+        let localizations = try #require(entry["localizations"] as? [String: Any])
+        let localeEntry = try #require(localizations[locale] as? [String: Any])
+        let stringUnit = try #require(localeEntry["stringUnit"] as? [String: Any])
+        return try #require(stringUnit["value"] as? String)
     }
 }
